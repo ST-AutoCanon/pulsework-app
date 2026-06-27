@@ -1,203 +1,107 @@
-"use client";
+Location Punch Test
 
-import { useEffect, useState } from "react";
+Latitude:17.336322
 
 
-export default function Home() {
 
-  const OFFICE = {
-    latitude: 17.337219750493414,
-    longitude: 76.84168637811288,
-    radius: 100
-  };
+Longitude:76.858176
 
-  const [location,setLocation] = useState({
-    latitude:"",
-    longitude:"",
-    accuracy:"",
-    distance:"",
-    status:"Checking..."
-  });
 
 
+Accuracy:131 meters
 
-  function calculateDistance(
-    lat1:number,
-    lon1:number,
-    lat2:number,
-    lon2:number
-  ){
 
-    const R = 6371000;
 
+Distance:1753 meters
 
-    const dLat =
-    (lat2-lat1)*Math.PI/180;
 
 
-    const dLon =
-    (lon2-lon1)*Math.PI/180;
+OUTSIDE OFFICE ❌
 
 
-    const a =
-    Math.sin(dLat/2) *
-    Math.sin(dLat/2)
 
-    +
+in hosted env it is showing like this 
 
-    Math.cos(lat1*Math.PI/180)
-    *
-    Math.cos(lat2*Math.PI/180)
-    *
-    Math.sin(dLon/2)
-    *
-    Math.sin(dLon/2);
 
 
-    const c =
-    2 *
-    Math.atan2(
-      Math.sqrt(a),
-      Math.sqrt(1-a)
-    );
 
 
-    return R*c;
+in local showing like this why
 
-  }
+Location Punch Test
 
+Latitude:17.336321
 
 
-  useEffect(()=>{
 
+Longitude:76.858231
 
-    const watcher =
-    navigator.geolocation.watchPosition(
 
-      (position)=>{
 
+Accuracy:149 meters
 
-        const lat =
-        position.coords.latitude;
 
 
-        const lng =
-        position.coords.longitude;
+Distance:9 meters
 
 
-        const distance =
-        calculateDistance(
-          lat,
-          lng,
-          OFFICE.latitude,
-          OFFICE.longitude
-        );
 
+INSIDE OFFICE ✅
 
-        setLocation({
 
-          latitude:lat.toFixed(6),
 
-          longitude:lng.toFixed(6),
 
-          accuracy:
-          Math.round(
-          position.coords.accuracy
-          ).toString(),
 
-          distance:
-          Math.round(distance).toString(),
 
 
-          status:
-          distance <= OFFICE.radius
-          ?
-          "INSIDE OFFICE ✅"
-          :
-          "OUTSIDE OFFICE ❌"
+Location Punch Test
 
-        });
+Latitude:17.336322
 
 
-      },
 
+Longitude:76.858176
 
-      ()=>{
-        setLocation(prev=>({
-          ...prev,
-          status:"Location permission denied"
-        }))
-      },
 
 
-      {
-        enableHighAccuracy:true
-      }
+Accuracy:131 meters
 
 
-    );
 
+Distance:1753 meters
 
-    return ()=>{
-      navigator.geolocation.clearWatch(watcher);
-    }
 
 
-  },[]);
+OUTSIDE OFFICE ❌
 
 
 
-  return (
+in hosted env it is showing like this 
 
-    <div style={{
-      padding:"30px",
-      fontFamily:"Arial"
-    }}>
 
 
-      <h1>
-        Location Punch Test
-      </h1>
 
 
-      <p>
-        Latitude:
-        <b>{location.latitude}</b>
-      </p>
+in local showing like this why
 
+Location Punch Test
 
-      <p>
-        Longitude:
-        <b>{location.longitude}</b>
-      </p>
+Latitude:17.336321
 
 
-      <p>
-        Accuracy:
-        <b>{location.accuracy} meters</b>
-      </p>
 
+Longitude:76.858231
 
-      <p>
-        Distance:
-        <b>{location.distance} meters</b>
-      </p>
 
 
-      <h2 style={{
-        color:
-        location.status.includes("INSIDE")
-        ?
-        "green"
-        :
-        "red"
-      }}>
-        {location.status}
-      </h2>
+Accuracy:149 meters
 
 
-    </div>
 
-  );
+Distance:9 meters
 
-}
+
+
+INSIDE OFFICE ✅
+
+
