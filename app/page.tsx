@@ -6,8 +6,8 @@ import { useEffect, useState } from "react";
 export default function Home() {
 
   const OFFICE = {
-    latitude: 17.337219750493414,
-    longitude: 76.84168637811288,
+    latitude: 17.335870766757022,
+    longitude: 76.85601602436287,
     radius: 100
   };
 
